@@ -49,30 +49,31 @@ class Block {
   }
 
   draw() {
+    const { extrusion, height, width, x, x2, y, y2 } = this;
     ctx.save();
     ctx.lineWidth = 1;
     ctx.fillStyle = 'black';
     ctx.strokeStyle = 'white';
-    ctx.strokeRect(this.x, this.y, this.height, this.width);
+    ctx.strokeRect(x, y, height, width);
     ctx.stroke();
 
-    if(this.extrusion != 0) {
+    if(extrusion != 0) {
       // Top Side
       ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(this.x - this.extrusion, this.y - this.extrusion);
-      ctx.lineTo(this.x2 - this.extrusion, this.y - this.extrusion);
-      ctx.lineTo(this.x + this.width, this.y);
+      ctx.moveTo(x, y);
+      ctx.lineTo(x - extrusion, y - extrusion);
+      ctx.lineTo(x2 - extrusion, y - extrusion);
+      ctx.lineTo(x + width, y);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
 
       // Left Side
       ctx.beginPath();
-      ctx.moveTo(this.x, this.y);
-      ctx.lineTo(this.x - this.extrusion, this.y  - this.extrusion);
-      ctx.lineTo(this.x - this.extrusion, this.y2 - this.extrusion);
-      ctx.lineTo(this.x, this.y + this.height);
+      ctx.moveTo(x, y);
+      ctx.lineTo(x - extrusion, y  - extrusion);
+      ctx.lineTo(x - extrusion, y2 - extrusion);
+      ctx.lineTo(x, y + height);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
@@ -81,16 +82,19 @@ class Block {
     ctx.restore();
   }
 
-  update(){
-    if(this.y > canvas.height) {
-      this.y = roundTo((Math.random() * canvas.height), 45);
+  update() {
+    const { draw, dy, x, y} = this;
+    let { x2, y2 } = this;
+
+    if(y > canvas.height) {
+      y = roundTo((Math.random() * canvas.height), 45);
     }
 
-    this.y += this.dy;
-    this.x2 = this.x + this.height;
-    this.y2 = this.y + this.width;
+    y += dy;
+    x2 = x + height;
+    y2 = y + width;
 
-    this.draw();
+    draw();
   }
 
   extrude() {
@@ -99,7 +103,7 @@ class Block {
 }
 
 function drawBlocks(a) {
-  for(let i=0; i <= a; ++i) {
+  for(let i = 0; i <= a; ++i) {
     const x = roundTo(
       randomNumBias(0, canvas.width, 0.4, 2),
       40
