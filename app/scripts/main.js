@@ -2,7 +2,7 @@ var canvas = document.getElementById('canvas')
   , ctx = canvas.getContext('2d')
   , center = {x: canvas.width / 2, y: canvas.height / 2};
 
-var gridBlocks = [];
+var blocks = [];
 
 canvas.width = window. innerWidth - 20;
 canvas.height = window.innerHeight - 20;
@@ -14,7 +14,7 @@ window.onload = () => {
     canvas.height = canvas.height = window.innerHeight - 10;
     center = {x: canvas.width / 2, y: canvas.height / 2};
 
-    gridBlocks = [];
+    blocks = [];
     drawBlocks(100);
   };
 
@@ -27,9 +27,12 @@ function loop() {
 
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  for(var i = 0; i < blocks.length; i++) {
+    if(randomNumBias(0, 1, 0.4, 0) === 0) {
+      blocks[i].extrude();
+    }
 
-  for(var i = i; i < gridBlocks.length; i++) {
-    gridBlocks[i].update();
+    blocks[i].update();
   }
 }
 
@@ -56,7 +59,7 @@ function Block(x, y, width, height) {
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(this.x - this.extrusion, this.y - this.extrusion);
       ctx.lineTo(this.x2 - this.extrusion, this.y - this.extrusion);
-      ctx.lineTo(this.x + this.blockWidth, this.y);
+      ctx.lineTo(this.x + this.width, this.y);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
@@ -66,7 +69,7 @@ function Block(x, y, width, height) {
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(this.x - this.extrusion, this.y  - this.extrusion);
       ctx.lineTo(this.x - this.extrusion, this.y2 - this.extrusion);
-      ctx.lineTo(this.x, this.y + blockHeight);
+      ctx.lineTo(this.x, this.y + height);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
@@ -75,20 +78,20 @@ function Block(x, y, width, height) {
     ctx.restore();
   }
 
-  this.extrude = function() {
-    this.extrusion = 1;
-  }
-
   this.update = function(){
     if(this.y > canvas.height) {
       this.y = roundTo((Math.random() * canvas.height), 45);
     }
 
     this.y += this.dy;
-    this.x2 = this.x + blockHeight;
-    this.y2 = this.y + blockWidth;
+    this.x2 = this.x + this.height;
+    this.y2 = this.y + this.width;
 
     this.draw();
+  }
+
+  this.extrude = function() {
+    this.extrusion = 1;
   }
 }
 
@@ -102,7 +105,8 @@ function drawBlocks(a) {
       randomNumBias(0, canvas.height, 0.4, 100),
       40
     );
-    gridBlocks.push(new Block(x, y, 40, 40));
+
+    blocks.push(new Block(x, y, 40, 40));
   }
 }
 
