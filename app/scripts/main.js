@@ -37,16 +37,18 @@ function loop() {
   }
 }
 
-function Block(x, y, width, height) {
-  this.x = x;
-  this.y = y;
-  this.width = width;
-  this.height = height;
-  this.dy = 0;
-  this.extrusion = 0;
-  this.extrusionDepth = 10;
+class Block {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.dy = 0;
+    this.extrusion = 0;
+    this.extrusionDepth = 10;
+  }
 
-  this.draw = function() {
+  draw() {
     ctx.save();
     ctx.lineWidth = 1;
     ctx.fillStyle = 'black';
@@ -70,7 +72,7 @@ function Block(x, y, width, height) {
       ctx.moveTo(this.x, this.y);
       ctx.lineTo(this.x - this.extrusion, this.y  - this.extrusion);
       ctx.lineTo(this.x - this.extrusion, this.y2 - this.extrusion);
-      ctx.lineTo(this.x, this.y + height);
+      ctx.lineTo(this.x, this.y + this.height);
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
@@ -79,7 +81,7 @@ function Block(x, y, width, height) {
     ctx.restore();
   }
 
-  this.update = function(){
+  update(){
     if(this.y > canvas.height) {
       this.y = roundTo((Math.random() * canvas.height), 45);
     }
@@ -91,7 +93,7 @@ function Block(x, y, width, height) {
     this.draw();
   }
 
-  this.extrude = function() {
+  extrude() {
     this.extrusion = 1;
   }
 }
