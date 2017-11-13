@@ -1,3 +1,13 @@
+// bower:scss
+// endbower
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
 html, body {
   height: 100%;
   font-family: 'futura', sans-serif;
@@ -18,7 +28,7 @@ body {
 }
 
 canvas {
-  display: block;	
+  display: block;
   top: 10px;
   position: absolute;
   left: 10px;
@@ -42,7 +52,7 @@ canvas {
   margin-bottom: 20px;
   display: relative;
 
-  
+
   &:hover {
     background-color: #fff;
     color: #000;

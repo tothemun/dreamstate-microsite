@@ -18,7 +18,7 @@ window.onload = () => {
     gridBlocks = [];
     drawGrid(100);
   };
-  
+
   drawBlocks(25);
   drawGrid(100);
   loop();
@@ -28,12 +28,12 @@ function loop() {
   requestAnimationFrame(loop);
 
   ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, canvas.width, canvas.height); 
-  
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   for (var i = 1; i < blocks.length; i++){
     blocks[i].update();
   }
-  
+
   for(var i = i; i < gridBlocks.length; i++) {
     gridBlocks[i].draw();
   }
@@ -44,7 +44,7 @@ function Block(x, y, width, height) {
   this.y = y;
   this.width = width;
   this.height = height;
-  
+
   this.draw = function() {
     ctx.save();
     ctx.lineWidth = 1;
@@ -65,16 +65,16 @@ function FallingBlock(x, y, dx, blockWidth, blockHeight) {
   this.blockWidth = blockWidth;
   this.blockHeight = blockHeight;
   this.mod = 10;
-  
+
   this.draw = function() {
     ctx.save();
     ctx.lineWidth = 1;
     ctx.strokeStyle = '#fb6aab';
     ctx.fillStyle = 'black';
-   
-    
-    
-      
+
+
+
+
     // Top Side
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
@@ -84,7 +84,7 @@ function FallingBlock(x, y, dx, blockWidth, blockHeight) {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
-    
+
     // Left Side
     ctx.beginPath();
     ctx.moveTo(this.x, this.y);
@@ -94,22 +94,22 @@ function FallingBlock(x, y, dx, blockWidth, blockHeight) {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
-    
+
     // Front Side
     ctx.beginPath();
     ctx.fillRect(this.x, this.y, this.blockWidth, this.blockWidth);
     ctx.strokeRect(this.x, this.y, this.blockWidth, this.blockWidth);
     ctx.stroke();
     ctx.closePath();
-    
+
     ctx.restore();
   }
-  
+
   this.update = function(){
     if(this.y > canvas.height) {
       this.y = roundTo((Math.random() * canvas.height), 45);
     }
-    
+
     this.y += this.dx;
     this.x2 = this.x + blockHeight;
     this.y2 = this.y + blockWidth;
@@ -123,7 +123,7 @@ function drawBlocks(a) {
     var x = roundTo(Math.floor(Math.random() * canvas.width), 40);
     var y = roundTo(Math.floor(Math.random() * canvas.height), 40);
     var dx = (Math.random() + 0.2 ) * 1;
-    
+
     blocks.push(new FallingBlock(x, y, dx, 40, 40));
   }
 }
@@ -131,11 +131,11 @@ function drawBlocks(a) {
 function drawGrid(a) {
   for(var i=0; i <= a; ++i) {
     var x = roundTo(
-      randomNumBias(0, canvas.width, 0.4, 2), 
+      randomNumBias(0, canvas.width, 0.4, 2),
       40
     );
     var y = roundTo(
-      randomNumBias(0, canvas.height, 0.4, 100), 
+      randomNumBias(0, canvas.height, 0.4, 100),
       40
     );
     gridBlocks.push(new Block(x, y, 40, 40));
