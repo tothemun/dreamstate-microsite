@@ -15,10 +15,10 @@ window.onload = () => {
     center = {x: canvas.width / 2, y: canvas.height / 2};
 
     gridBlocks = [];
-    drawGrid(100);
+    drawBlocks(100);
   };
 
-  drawGrid(100);
+  drawBlocks(100);
   loop();
 }
 
@@ -92,7 +92,7 @@ function Block(x, y, width, height) {
   }
 }
 
-function drawGrid(a) {
+function drawBlocks(a) {
   for(var i=0; i <= a; ++i) {
     var x = roundTo(
       randomNumBias(0, canvas.width, 0.4, 2),
