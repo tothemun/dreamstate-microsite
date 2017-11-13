@@ -1,6 +1,5 @@
 # dreamstate-microsite
 
-#\#To Run:
 
 Run `gulp serve` to preview and watch for changes
 
