@@ -8,24 +8,58 @@
   padding: 0.2em 0;
 }
 
-body {
-  background: #fafafa;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  color: #333;
+html, body {
+  height: 100%;
+  font-family: 'futura', sans-serif;
+  color: #fff;
+  letter-spacing: 1px;
+  padding: 0;
 }
 
-.hero-unit {
-  margin: 50px auto 0 auto;
-  width: 300px;
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 30px;
-  background-color: #eee;
-  border-radius: 6px;
-  padding: 60px;
-  h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+body {
+  background-color: #000;
+  margin: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid white;
+}
+
+canvas {
+  display: block;
+  top: 10px;
+  position: absolute;
+  left: 10px;
+  z-index: -1;
+}
+
+#ds-logo {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: block;
+  border: 2px white solid;
+  padding: 20px;
+  color: #fff;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 100ms all ease;
+  text-decoration: none;
+  margin-bottom: 20px;
+  display: relative;
+
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
   }
+}
+
+h5 {
+  margin-bottom: 0px;
+  margin-top: 0;
 }
