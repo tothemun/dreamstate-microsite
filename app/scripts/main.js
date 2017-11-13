@@ -1,8 +1,8 @@
-var canvas = document.getElementById('canvas')
+let canvas = document.getElementById('canvas')
   , ctx = canvas.getContext('2d')
   , center = {x: canvas.width / 2, y: canvas.height / 2};
 
-var blocks = [];
+let blocks = [];
 
 canvas.width = window. innerWidth - 20;
 canvas.height = window.innerHeight - 20;
@@ -30,7 +30,6 @@ function loop() {
   for(let i = 0; i < blocks.length; i++) {
     const occurence = 0.00005;
     if(randomNumBias(0, 1, 0, 1) < occurence) {
-      console.log('hi')
       blocks[i].extrude();
     }
 
@@ -98,12 +97,12 @@ function Block(x, y, width, height) {
 }
 
 function drawBlocks(a) {
-  for(var i=0; i <= a; ++i) {
-    var x = roundTo(
+  for(let i=0; i <= a; ++i) {
+    const x = roundTo(
       randomNumBias(0, canvas.width, 0.4, 2),
       40
     );
-    var y = roundTo(
+    const y = roundTo(
       randomNumBias(0, canvas.height, 0.4, 100),
       40
     );
@@ -117,9 +116,9 @@ function roundTo(value, roundTo) {
 }
 
 function randomNumBias(min, max, bias, influence) {
-   var random = Math.random() * (max - min) + min;
-   var difference = random - bias;
-   var mixer = Math.pow(Math.random(), influence);
-   var toBeRemoved = difference * mixer;
+   const random = Math.random() * (max - min) + min;
+   const difference = random - bias;
+   const mixer = Math.pow(Math.random(), influence);
+   const toBeRemoved = difference * mixer;
    return random - toBeRemoved;
 }
