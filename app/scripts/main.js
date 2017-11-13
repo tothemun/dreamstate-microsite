@@ -27,8 +27,10 @@ function loop() {
 
   ctx.fillStyle = 'black';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  for(var i = 0; i < blocks.length; i++) {
-    if(randomNumBias(0, 1, 0.4, 0) === 0) {
+  for(let i = 0; i < blocks.length; i++) {
+    const occurence = 0.00005;
+    if(randomNumBias(0, 1, 0, 1) < occurence) {
+      console.log('hi')
       blocks[i].extrude();
     }
 
